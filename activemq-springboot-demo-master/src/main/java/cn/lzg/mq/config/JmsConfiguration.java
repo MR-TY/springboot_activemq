@@ -27,6 +27,7 @@ public class JmsConfiguration {
     @Bean(name = "jmsListenerContainerTopic")
     public JmsListenerContainerFactory<?> jmsListenerContainerTopic(ConnectionFactory activeMQConnectionFactory) {
         DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
+        // true表示的是topic，默认是false是对列
         bean.setPubSubDomain(true);
         bean.setConnectionFactory(activeMQConnectionFactory);
         return bean;

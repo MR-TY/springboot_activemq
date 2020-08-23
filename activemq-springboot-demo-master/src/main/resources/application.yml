@@ -1,4 +1,8 @@
 spring:
   activemq:
     in-memory: false
-    broker-url: tcp://127.0.0.1:61616
+    broker-url: tcp://122.51.212.111:61616 #mq服务器的地址
+    user: admin
+    password: admin
+server:
+  port: 8082

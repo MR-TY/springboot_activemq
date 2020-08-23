@@ -5,6 +5,8 @@ import cn.lzg.mq.utils.ProtoStuffSerializerUtil;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+import javax.jms.JMSException;
+import javax.jms.TextMessage;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class Consumer {
 
     @JmsListener(destination = "test.queue", containerFactory = "jmsListenerContainerQueue")
-    private void getQueueMessageText(final String text) {
+    private void getQueueMessageText(TextMessage text) throws JMSException {
         /*try {
             // 模拟业务处理
             System.out.println("getMessageText 休息10s");
@@ -28,7 +30,7 @@ public class Consumer {
         }*/
         System.out.println("##################################################################");
         System.out.println("线程ID = " + Thread.currentThread().getId());
-        System.out.println("消费者接受queue信息：" + text);
+        System.out.println("消费者接受queue信息：" + text.getText());
 
     }
 

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2016/12/24 12:22
  */
 @Configuration
-public class QueueDefine {
+public class QueueTopicDefine {
     /**
      * 定义test.queue Queue
      */

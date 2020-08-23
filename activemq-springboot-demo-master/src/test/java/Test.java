@@ -1,13 +1,15 @@
 import cn.lzg.mq.Application;
 import cn.lzg.mq.dto.MessageDto;
 import cn.lzg.mq.producer.Producer;
-import cn.lzg.mq.utils.ProtoStuffSerializerUtil;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author lzg
@@ -23,7 +25,7 @@ public class Test {
 
     @org.junit.Test
     public void testSendQueueMsg(){
-        for(int i=0; i<10; i++){
+        for(int i=0; i<1; i++){
             producer.sendQueueText("第："+ i +"跳sendQueueText测试消息");
         }
 
@@ -46,6 +48,20 @@ public class Test {
             messageDto.setCreateTime(new Date());
             messageDto.setUsed(false);
             producer.sendQueueObj(messageDto);
+        }
+    }
+
+    @org.junit.Test
+    public void timingMessage(){
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool( 5 );
+        while (true) {
+            scheduledExecutorService.schedule( new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println( "success" );
+                    producer.sendQueueText("延迟时间："+new Date(  ));
+                }
+            }, 10, TimeUnit.SECONDS );
         }
     }
 }

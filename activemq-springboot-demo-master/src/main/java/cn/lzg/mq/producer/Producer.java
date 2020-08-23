@@ -4,10 +4,12 @@ import cn.lzg.mq.dto.MessageDto;
 import cn.lzg.mq.utils.ProtoStuffSerializerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.jms.Queue;
 import javax.jms.Topic;
+import java.util.Date;
 
 /**
  * 生产者类
@@ -39,6 +41,14 @@ public class Producer {
 
     public void sendQueueObj(MessageDto msg)  {
         this.jmsMessagingTemplate.convertAndSend(this.testQueueObj, ProtoStuffSerializerUtil.serialize(msg));
+    }
+
+    /**
+     * 间隔时间定投(间隔3秒)
+     */
+    @Scheduled(cron = " 0/3 * * * * ? ")
+    public void scheduled(){
+        this.jmsMessagingTemplate.convertAndSend(this.testQueue, "ni hao tangyu" +new Date() );
     }
 }
 
