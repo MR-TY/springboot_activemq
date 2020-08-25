@@ -1,7 +1,7 @@
 spring:
   activemq:
     in-memory: false
-    broker-url: tcp://122.51.212.111:61616 #mq服务器的地址
+    broker-url: nio://122.51.212.111:61618 #mq服务器的地址tcp://122.51.212.111:61616
     user: admin
     password: admin
 server:

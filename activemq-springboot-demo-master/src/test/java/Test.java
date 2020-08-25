@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.jms.DeliveryMode;
 import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,9 +27,8 @@ public class Test {
     @org.junit.Test
     public void testSendQueueMsg(){
         for(int i=0; i<1; i++){
-            producer.sendQueueText("第："+ i +"跳sendQueueText测试消息");
+            producer.sendQueueTextJms("tangyu", DeliveryMode.NON_PERSISTENT, 6 );
         }
-
     }
 
     @org.junit.Test

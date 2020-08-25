@@ -17,7 +17,7 @@ public class QueueTopicDefine {
      */
     @Bean(name = "testQueue")
     public javax.jms.Queue testQueue() {
-        return new ActiveMQQueue("test.queue");
+        return new ActiveMQQueue("test.queue.transport");
     }
 
     /**
@@ -25,7 +25,7 @@ public class QueueTopicDefine {
      */
     @Bean(name = "testTopic")
     public javax.jms.Topic testTopic() {
-        return new ActiveMQTopic("test.topic");
+        return new ActiveMQTopic("test.topic.transport");
     }
 
     /**

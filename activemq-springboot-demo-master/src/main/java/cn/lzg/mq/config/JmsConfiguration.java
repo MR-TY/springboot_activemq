@@ -38,6 +38,8 @@ public class JmsConfiguration {
     public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory activeMQConnectionFactory) {
         DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
         bean.setConnectionFactory(activeMQConnectionFactory);
+        // 签收设置
+        bean.setSessionAcknowledgeMode( 4 );
         return bean;
     }
 

@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class Consumer {
 
-    @JmsListener(destination = "test.queue", containerFactory = "jmsListenerContainerQueue")
+    @JmsListener(destination = "test.queue.transport", containerFactory = "jmsListenerContainerQueue")
     private void getQueueMessageText(TextMessage text) throws JMSException {
         /*try {
             // 模拟业务处理
@@ -31,10 +31,11 @@ public class Consumer {
         System.out.println("##################################################################");
         System.out.println("线程ID = " + Thread.currentThread().getId());
         System.out.println("消费者接受queue信息：" + text.getText());
-
+        // 进行消息的签收
+        text.acknowledge();
     }
 
-    @JmsListener(destination = "test.topic", containerFactory = "jmsListenerContainerTopic")
+    @JmsListener(destination = "test.topic.transport", containerFactory = "jmsListenerContainerTopic")
     private void getTopicMessageText(final String text) {
         /*try {
             // 模拟业务处理
