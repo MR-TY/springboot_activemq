@@ -38,7 +38,7 @@ public class JmsConfiguration {
     public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory activeMQConnectionFactory) {
         DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
         bean.setConnectionFactory(activeMQConnectionFactory);
-        // 签收设置
+        // 签收设置(注意此手动签收模型要配置为4不然配置为自带的客户端签收，会被spring给吞掉还是签收不了)
         bean.setSessionAcknowledgeMode( 4 );
         return bean;
     }
